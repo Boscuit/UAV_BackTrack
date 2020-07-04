@@ -1,0 +1,3 @@
+/home/boscuit/workspace/src/UAV_BackTrack/build/CMakeFiles/rebuild_cache.dir
+/home/boscuit/workspace/src/UAV_BackTrack/build/CMakeFiles/UAV_BackTrack.dir
+/home/boscuit/workspace/src/UAV_BackTrack/build/CMakeFiles/edit_cache.dir
