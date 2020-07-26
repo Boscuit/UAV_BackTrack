@@ -1,42 +1,42 @@
 [
 {
   "directory": "/home/boscuit/workspace/src/UAV_BackTrack/build",
-  "command": "/usr/bin/c++  -DCOMPILEDWITHC11 -DUAV_BackTrack_EXPORTS -I/home/boscuit/workspace/src/UAV_BackTrack -I/home/boscuit/workspace/src/UAV_BackTrack/include -I/usr/include/eigen3 -isystem /usr/include/opencv   -Wall   -O3 -march=native -std=c++11 -g -fPIC   -o CMakeFiles/UAV_BackTrack.dir/src/System.cc.o -c /home/boscuit/workspace/src/UAV_BackTrack/src/System.cc",
+  "command": "/usr/bin/c++  -DCOMPILEDWITHC11 -DUAV_BackTrack_EXPORTS -I/home/boscuit/workspace/src/UAV_BackTrack -I/home/boscuit/workspace/src/UAV_BackTrack/include -I/usr/include/eigen3 -isystem /usr/include/opencv   -Wall   -O3 -march=native -std=c++11 -O3 -DNDEBUG -fPIC   -o CMakeFiles/UAV_BackTrack.dir/src/System.cc.o -c /home/boscuit/workspace/src/UAV_BackTrack/src/System.cc",
   "file": "/home/boscuit/workspace/src/UAV_BackTrack/src/System.cc"
 },
 {
   "directory": "/home/boscuit/workspace/src/UAV_BackTrack/build",
-  "command": "/usr/bin/c++  -DCOMPILEDWITHC11 -DUAV_BackTrack_EXPORTS -I/home/boscuit/workspace/src/UAV_BackTrack -I/home/boscuit/workspace/src/UAV_BackTrack/include -I/usr/include/eigen3 -isystem /usr/include/opencv   -Wall   -O3 -march=native -std=c++11 -g -fPIC   -o CMakeFiles/UAV_BackTrack.dir/src/ORBextractor.cc.o -c /home/boscuit/workspace/src/UAV_BackTrack/src/ORBextractor.cc",
+  "command": "/usr/bin/c++  -DCOMPILEDWITHC11 -DUAV_BackTrack_EXPORTS -I/home/boscuit/workspace/src/UAV_BackTrack -I/home/boscuit/workspace/src/UAV_BackTrack/include -I/usr/include/eigen3 -isystem /usr/include/opencv   -Wall   -O3 -march=native -std=c++11 -O3 -DNDEBUG -fPIC   -o CMakeFiles/UAV_BackTrack.dir/src/ORBextractor.cc.o -c /home/boscuit/workspace/src/UAV_BackTrack/src/ORBextractor.cc",
   "file": "/home/boscuit/workspace/src/UAV_BackTrack/src/ORBextractor.cc"
 },
 {
   "directory": "/home/boscuit/workspace/src/UAV_BackTrack/build",
-  "command": "/usr/bin/c++  -DCOMPILEDWITHC11 -DUAV_BackTrack_EXPORTS -I/home/boscuit/workspace/src/UAV_BackTrack -I/home/boscuit/workspace/src/UAV_BackTrack/include -I/usr/include/eigen3 -isystem /usr/include/opencv   -Wall   -O3 -march=native -std=c++11 -g -fPIC   -o CMakeFiles/UAV_BackTrack.dir/src/ORBmatcher.cc.o -c /home/boscuit/workspace/src/UAV_BackTrack/src/ORBmatcher.cc",
+  "command": "/usr/bin/c++  -DCOMPILEDWITHC11 -DUAV_BackTrack_EXPORTS -I/home/boscuit/workspace/src/UAV_BackTrack -I/home/boscuit/workspace/src/UAV_BackTrack/include -I/usr/include/eigen3 -isystem /usr/include/opencv   -Wall   -O3 -march=native -std=c++11 -O3 -DNDEBUG -fPIC   -o CMakeFiles/UAV_BackTrack.dir/src/ORBmatcher.cc.o -c /home/boscuit/workspace/src/UAV_BackTrack/src/ORBmatcher.cc",
   "file": "/home/boscuit/workspace/src/UAV_BackTrack/src/ORBmatcher.cc"
 },
 {
   "directory": "/home/boscuit/workspace/src/UAV_BackTrack/build",
-  "command": "/usr/bin/c++  -DCOMPILEDWITHC11 -DUAV_BackTrack_EXPORTS -I/home/boscuit/workspace/src/UAV_BackTrack -I/home/boscuit/workspace/src/UAV_BackTrack/include -I/usr/include/eigen3 -isystem /usr/include/opencv   -Wall   -O3 -march=native -std=c++11 -g -fPIC   -o CMakeFiles/UAV_BackTrack.dir/src/Converter.cc.o -c /home/boscuit/workspace/src/UAV_BackTrack/src/Converter.cc",
+  "command": "/usr/bin/c++  -DCOMPILEDWITHC11 -DUAV_BackTrack_EXPORTS -I/home/boscuit/workspace/src/UAV_BackTrack -I/home/boscuit/workspace/src/UAV_BackTrack/include -I/usr/include/eigen3 -isystem /usr/include/opencv   -Wall   -O3 -march=native -std=c++11 -O3 -DNDEBUG -fPIC   -o CMakeFiles/UAV_BackTrack.dir/src/Converter.cc.o -c /home/boscuit/workspace/src/UAV_BackTrack/src/Converter.cc",
   "file": "/home/boscuit/workspace/src/UAV_BackTrack/src/Converter.cc"
 },
 {
   "directory": "/home/boscuit/workspace/src/UAV_BackTrack/build",
-  "command": "/usr/bin/c++  -DCOMPILEDWITHC11 -DUAV_BackTrack_EXPORTS -I/home/boscuit/workspace/src/UAV_BackTrack -I/home/boscuit/workspace/src/UAV_BackTrack/include -I/usr/include/eigen3 -isystem /usr/include/opencv   -Wall   -O3 -march=native -std=c++11 -g -fPIC   -o CMakeFiles/UAV_BackTrack.dir/src/Optimizer.cc.o -c /home/boscuit/workspace/src/UAV_BackTrack/src/Optimizer.cc",
+  "command": "/usr/bin/c++  -DCOMPILEDWITHC11 -DUAV_BackTrack_EXPORTS -I/home/boscuit/workspace/src/UAV_BackTrack -I/home/boscuit/workspace/src/UAV_BackTrack/include -I/usr/include/eigen3 -isystem /usr/include/opencv   -Wall   -O3 -march=native -std=c++11 -O3 -DNDEBUG -fPIC   -o CMakeFiles/UAV_BackTrack.dir/src/Optimizer.cc.o -c /home/boscuit/workspace/src/UAV_BackTrack/src/Optimizer.cc",
   "file": "/home/boscuit/workspace/src/UAV_BackTrack/src/Optimizer.cc"
 },
 {
   "directory": "/home/boscuit/workspace/src/UAV_BackTrack/build",
-  "command": "/usr/bin/c++  -DCOMPILEDWITHC11 -DUAV_BackTrack_EXPORTS -I/home/boscuit/workspace/src/UAV_BackTrack -I/home/boscuit/workspace/src/UAV_BackTrack/include -I/usr/include/eigen3 -isystem /usr/include/opencv   -Wall   -O3 -march=native -std=c++11 -g -fPIC   -o CMakeFiles/UAV_BackTrack.dir/src/Frame.cc.o -c /home/boscuit/workspace/src/UAV_BackTrack/src/Frame.cc",
+  "command": "/usr/bin/c++  -DCOMPILEDWITHC11 -DUAV_BackTrack_EXPORTS -I/home/boscuit/workspace/src/UAV_BackTrack -I/home/boscuit/workspace/src/UAV_BackTrack/include -I/usr/include/eigen3 -isystem /usr/include/opencv   -Wall   -O3 -march=native -std=c++11 -O3 -DNDEBUG -fPIC   -o CMakeFiles/UAV_BackTrack.dir/src/Frame.cc.o -c /home/boscuit/workspace/src/UAV_BackTrack/src/Frame.cc",
   "file": "/home/boscuit/workspace/src/UAV_BackTrack/src/Frame.cc"
 },
 {
   "directory": "/home/boscuit/workspace/src/UAV_BackTrack/build",
-  "command": "/usr/bin/c++  -DCOMPILEDWITHC11 -DUAV_BackTrack_EXPORTS -I/home/boscuit/workspace/src/UAV_BackTrack -I/home/boscuit/workspace/src/UAV_BackTrack/include -I/usr/include/eigen3 -isystem /usr/include/opencv   -Wall   -O3 -march=native -std=c++11 -g -fPIC   -o CMakeFiles/UAV_BackTrack.dir/src/Initializer.cc.o -c /home/boscuit/workspace/src/UAV_BackTrack/src/Initializer.cc",
+  "command": "/usr/bin/c++  -DCOMPILEDWITHC11 -DUAV_BackTrack_EXPORTS -I/home/boscuit/workspace/src/UAV_BackTrack -I/home/boscuit/workspace/src/UAV_BackTrack/include -I/usr/include/eigen3 -isystem /usr/include/opencv   -Wall   -O3 -march=native -std=c++11 -O3 -DNDEBUG -fPIC   -o CMakeFiles/UAV_BackTrack.dir/src/Initializer.cc.o -c /home/boscuit/workspace/src/UAV_BackTrack/src/Initializer.cc",
   "file": "/home/boscuit/workspace/src/UAV_BackTrack/src/Initializer.cc"
 },
 {
   "directory": "/home/boscuit/workspace/src/UAV_BackTrack/build",
-  "command": "/usr/bin/c++  -DCOMPILEDWITHC11 -DUAV_BackTrack_EXPORTS -I/home/boscuit/workspace/src/UAV_BackTrack -I/home/boscuit/workspace/src/UAV_BackTrack/include -I/usr/include/eigen3 -isystem /usr/include/opencv   -Wall   -O3 -march=native -std=c++11 -g -fPIC   -o CMakeFiles/UAV_BackTrack.dir/src/BackTracking.cc.o -c /home/boscuit/workspace/src/UAV_BackTrack/src/BackTracking.cc",
+  "command": "/usr/bin/c++  -DCOMPILEDWITHC11 -DUAV_BackTrack_EXPORTS -I/home/boscuit/workspace/src/UAV_BackTrack -I/home/boscuit/workspace/src/UAV_BackTrack/include -I/usr/include/eigen3 -isystem /usr/include/opencv   -Wall   -O3 -march=native -std=c++11 -O3 -DNDEBUG -fPIC   -o CMakeFiles/UAV_BackTrack.dir/src/BackTracking.cc.o -c /home/boscuit/workspace/src/UAV_BackTrack/src/BackTracking.cc",
   "file": "/home/boscuit/workspace/src/UAV_BackTrack/src/BackTracking.cc"
 }
 ]

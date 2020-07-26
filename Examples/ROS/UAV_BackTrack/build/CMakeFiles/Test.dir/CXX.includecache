@@ -163,8 +163,8 @@ System.h
 /home/boscuit/workspace/src/UAV_BackTrack/Examples/ROS/UAV_BackTrack/src/System.h
 geometry_msgs/TransformStamped.h
 /home/boscuit/workspace/src/UAV_BackTrack/Examples/ROS/UAV_BackTrack/src/geometry_msgs/TransformStamped.h
-std_msgs/Int8.h
-/home/boscuit/workspace/src/UAV_BackTrack/Examples/ROS/UAV_BackTrack/src/std_msgs/Int8.h
+std_msgs/Char.h
+/home/boscuit/workspace/src/UAV_BackTrack/Examples/ROS/UAV_BackTrack/src/std_msgs/Char.h
 
 /opt/ros/melodic/include/cv_bridge/cv_bridge.h
 sensor_msgs/Image.h
@@ -946,7 +946,7 @@ stdexcept
 string
 -
 
-/opt/ros/melodic/include/std_msgs/Header.h
+/opt/ros/melodic/include/std_msgs/Char.h
 string
 -
 vector
@@ -962,7 +962,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/opt/ros/melodic/include/std_msgs/Int8.h
+/opt/ros/melodic/include/std_msgs/Header.h
 string
 -
 vector

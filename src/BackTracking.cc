@@ -98,12 +98,28 @@ cv::Mat BackTracking::BackTrack(const cv::Mat &Im1, const cv::Mat &Im2, const do
     Frame1.ComputeBoW();
     Frame2.ComputeBoW();
     ORBmatcher matcher(0.75,true);
-    vector<int> vMatches21;
+    vector<int> vMatches21, vIniMatches12;
     int nBoWmatches = matcher.SearchByBoW(Frame1,Frame2,vMatches21);
 
     cout << "nBoWmatches: "<<nBoWmatches<<endl;
 
-    ShowMatches(Im1,Im2,Frame1,Frame2,vMatches21,nBoWmatches);
+    ShowMatches(Im1,Im2,Frame1,Frame2,vMatches21,nBoWmatches,"BoW");
+    
+    mvbPrevMatched.resize(Frame1.mvKeysUn.size());
+    for(size_t i=0; i<Frame1.mvKeysUn.size(); i++)
+        mvbPrevMatched[i]=Frame1.mvKeysUn[i].pt;
+    int nInimatches = matcher.SearchForInitialization(Frame1,Frame2,mvbPrevMatched,vIniMatches12, 100);
+    cout << "nInimatches: "<<nInimatches<<endl;
+
+    vector<int> vIniMatches21 = vector<int>(Frame2.mvKeysUn.size(),-1);//store index of desired Frame's keypoints
+    for (size_t i=0;i<vIniMatches12.size();i++)
+    {
+        if(vIniMatches12[i]>=0)
+        {
+            vIniMatches21[vIniMatches12[i]] = i;
+        }
+    }
+    ShowMatches(Im1,Im2,Frame1,Frame2,vIniMatches21,nInimatches,"Initial");
     
     // vector<int> vMatches12 = vector<int>(Frame1.mvKeysUn.size(),-1);//store index of desired Frame's keypoints
     // for (size_t i=0;i<vMatches21.size();i++)
@@ -142,13 +158,14 @@ cv::Mat BackTracking::BackTrack(const cv::Mat &Im1, const cv::Mat &Im2, const do
         tcr.copyTo(Tcr.rowRange(0,3).col(3));
     }
 
+    ShowMatches(Im1,Im2,Frame1,Frame2,vMatches21,nBoWmatches,"BoW");
     
     return Tcr;
         
 }
 
 void BackTracking::ShowMatches(const cv::Mat &Im1, const cv::Mat &Im2, const Frame &Frame1, const Frame &Frame2, 
-                vector<int> vMatches21, int nBoWmatches)
+                vector<int> vMatches21, int nMatches, const string &methodName)
 {
     cv::Mat im = cv::Mat(max(Im1.rows,Im2.rows),Im1.cols+Im2.cols,Im1.type());
     Im1.copyTo(im.rowRange(0,Im1.rows).colRange(0,Im1.cols));
@@ -194,16 +211,17 @@ void BackTracking::ShowMatches(const cv::Mat &Im1, const cv::Mat &Im2, const Fra
     }
 
     stringstream sText, sTitle;
-    sText << "Search By BoW matches: "<<nBoWmatches;
-    sTitle << "Matching between " << Frame1.mnId << " and " << Frame2.mnId;
+    sText << "Search By " << methodName << " matches: "<< nMatches;
+    sTitle << "Result/" << Frame1.mnId << " and " << Frame2.mnId <<" "<< methodName << "Match: "<<nMatches << ".png";
     int baseline=0;
     cv::Size textSize = cv::getTextSize(sText.str(),cv::FONT_HERSHEY_PLAIN,1,1,&baseline);
     cv::Mat imText = cv::Mat(im.rows+textSize.height+10,im.cols,im.type());
     im.copyTo(imText.rowRange(0,im.rows).colRange(0,im.cols));
     imText.rowRange(im.rows,imText.rows) = cv::Mat::zeros(textSize.height+10,im.cols,im.type());
     cv::putText(imText,sText.str(),cv::Point(5,imText.rows-5),cv::FONT_HERSHEY_PLAIN,1,cv::Scalar(255,255,255),1,8);
-    cv::imshow("SearchByBoW",imText);
-    cv::waitKey(500);
+    cv::imwrite(sTitle.str(),imText);
+    // cv::imshow(methodName,imText);
+    // cv::waitKey(0);
 }
 
 

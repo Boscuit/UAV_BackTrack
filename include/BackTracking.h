@@ -28,7 +28,7 @@ public:
     
 private:
     void ShowMatches(const cv::Mat &Im1, const cv::Mat &Im2, const Frame &Frame1, const Frame &Frame2,
-                    vector<int> vMatches21, int nBoWmatches);
+                    vector<int> vMatches21, int nBoWmatches, const string &methodName);
 
     //ORB
     ORBextractor* mpORBextractor;

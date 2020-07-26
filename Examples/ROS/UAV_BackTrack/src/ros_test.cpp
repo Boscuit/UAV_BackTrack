@@ -12,7 +12,7 @@
 
 #include "System.h"
 #include "geometry_msgs/TransformStamped.h"
-#include "std_msgs/Int8.h"
+#include "std_msgs/Char.h"
 
 
 using namespace std;
@@ -32,7 +32,7 @@ public:
       cmd_sub = n.subscribe("/Request", 1, &Visualizer::ProcessImages, this);
   }
 
-  void ProcessImages(const std_msgs::Int8& cmd);
+  void ProcessImages(const std_msgs::Char& cmd);
 
   void LoadGroundTruth(const string &strGroundTruthPath);
 
@@ -41,7 +41,8 @@ public:
   ros::NodeHandle n;
 
 private:
-  size_t nImgsIndex = 0;
+  size_t nImgsIndexStart = 50;
+  size_t nImgsIndex = nImgsIndexStart;
   size_t ndesiredIndex;
   vector<string> mvstrImage;
   vector<double> mvTimestamps;
@@ -136,6 +137,14 @@ int main(int argc, char **argv)
     
     Vis.LoadGroundTruth(argv[5]);
 
+    // std_msgs::Char sudocmd;
+    // sudocmd.data = 'p';
+    // for (int i =0; i<69;i++)
+    // {
+    //   cout << "p" << endl;
+    //   Vis.ProcessImages(sudocmd);
+    // }
+
     ros::spin();
 
     //ending job
@@ -146,7 +155,7 @@ int main(int argc, char **argv)
 
 }
 
-void Visualizer::ProcessImages(const std_msgs::Int8& cmd)
+void Visualizer::ProcessImages(const std_msgs::Char& cmd)
 {
   if (cmd.data == 'p' || cmd.data == 's')
   {
@@ -156,7 +165,7 @@ void Visualizer::ProcessImages(const std_msgs::Int8& cmd)
       if (nImgsIndex<(mvTimestamps.size()-1))
         nImgsIndex++;
       else
-        nImgsIndex=0;
+        nImgsIndex = nImgsIndexStart;
     }
     //if 's' don't change
 
