@@ -103,6 +103,25 @@ cv::Mat BackTracking::BackTrack(const cv::Mat &Im1, const cv::Mat &Im2, const do
 
     cout << "nBoWmatches: "<<nBoWmatches<<endl;
 
+<<<<<<< HEAD
+    // ShowMatches(Im1,Im2,Frame1,Frame2,vMatches21,nBoWmatches,"BoW");
+    
+    // mvbPrevMatched.resize(Frame1.mvKeysUn.size());
+    // for(size_t i=0; i<Frame1.mvKeysUn.size(); i++)
+    //     mvbPrevMatched[i]=Frame1.mvKeysUn[i].pt;
+    // int nInimatches = matcher.SearchForInitialization(Frame1,Frame2,mvbPrevMatched,vIniMatches12, 100);
+    // cout << "nInimatches: "<<nInimatches<<endl;
+
+    // vector<int> vIniMatches21 = vector<int>(Frame2.mvKeysUn.size(),-1);//store index of desired Frame's keypoints
+    // for (size_t i=0;i<vIniMatches12.size();i++)
+    // {
+    //     if(vIniMatches12[i]>=0)
+    //     {
+    //         vIniMatches21[vIniMatches12[i]] = i;
+    //     }
+    // }
+    // ShowMatches(Im1,Im2,Frame1,Frame2,vIniMatches21,nInimatches,"Initial");
+=======
     ShowMatches(Im1,Im2,Frame1,Frame2,vMatches21,nBoWmatches,"BoW");
     
     mvbPrevMatched.resize(Frame1.mvKeysUn.size());
@@ -120,6 +139,7 @@ cv::Mat BackTracking::BackTrack(const cv::Mat &Im1, const cv::Mat &Im2, const do
         }
     }
     ShowMatches(Im1,Im2,Frame1,Frame2,vIniMatches21,nInimatches,"Initial");
+>>>>>>> 86e8fdfc9e3ba089e62d43fc416d9c6cdc9524d0
     
     // vector<int> vMatches12 = vector<int>(Frame1.mvKeysUn.size(),-1);//store index of desired Frame's keypoints
     // for (size_t i=0;i<vMatches21.size();i++)
@@ -220,8 +240,14 @@ void BackTracking::ShowMatches(const cv::Mat &Im1, const cv::Mat &Im2, const Fra
     imText.rowRange(im.rows,imText.rows) = cv::Mat::zeros(textSize.height+10,im.cols,im.type());
     cv::putText(imText,sText.str(),cv::Point(5,imText.rows-5),cv::FONT_HERSHEY_PLAIN,1,cv::Scalar(255,255,255),1,8);
     cv::imwrite(sTitle.str(),imText);
+<<<<<<< HEAD
+
+    // cv::imshow(methodName,imText);
+    // cv::waitKey(500);
+=======
     // cv::imshow(methodName,imText);
     // cv::waitKey(0);
+>>>>>>> 86e8fdfc9e3ba089e62d43fc416d9c6cdc9524d0
 }
 
 

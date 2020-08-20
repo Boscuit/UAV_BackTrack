@@ -40,8 +40,17 @@ public:
 
   ros::NodeHandle n;
 
+  vector<float> ex;
+  vector<float> ey;
+  vector<float> ez;
+  vector<float> et;
+
 private:
+<<<<<<< HEAD
+  size_t nImgsIndexStart = 0;
+=======
   size_t nImgsIndexStart = 50;
+>>>>>>> 86e8fdfc9e3ba089e62d43fc416d9c6cdc9524d0
   size_t nImgsIndex = nImgsIndexStart;
   size_t ndesiredIndex;
   vector<string> mvstrImage;
@@ -137,6 +146,15 @@ int main(int argc, char **argv)
     
     Vis.LoadGroundTruth(argv[5]);
 
+<<<<<<< HEAD
+    std_msgs::Char sudocmd;
+    sudocmd.data = 'p';
+    for (int i =0; i<69;i++)
+    {
+      cout << "p" << endl;
+      Vis.ProcessImages(sudocmd);
+    }
+=======
     // std_msgs::Char sudocmd;
     // sudocmd.data = 'p';
     // for (int i =0; i<69;i++)
@@ -144,12 +162,41 @@ int main(int argc, char **argv)
     //   cout << "p" << endl;
     //   Vis.ProcessImages(sudocmd);
     // }
+>>>>>>> 86e8fdfc9e3ba089e62d43fc416d9c6cdc9524d0
 
     ros::spin();
 
-    //ending job
 
     ros::shutdown();
+
+    //ending job
+    cout << "Wirting files. size: " << Vis.ex.size() << endl;
+    ofstream fx,fy,fz,ft;
+    fx.open("fx.txt");
+    fy.open("fy.txt");
+    fz.open("fz.txt");
+    ft.open("ft.txt");
+    fx << fixed;
+    fy << fixed;
+    fz << fixed;
+    ft << fixed;
+    if (Vis.ex.size() != Vis.ey.size() || Vis.ex.size() != Vis.ez.size() || Vis.ex.size() != Vis.et.size())
+      cout << "Invalid size." <<endl;
+    else
+    {
+      for (int i=0; i<Vis.ex.size(); i++)
+      {
+        fx << Vis.ex[i] << ",";
+        fy << Vis.ey[i] << ",";
+        fz << Vis.ez[i] << ",";
+        ft << Vis.et[i] << ",";
+      }
+    }
+    fx.close();
+    fy.close();
+    fz.close();
+    ft.close();
+    cout<< "saved"<<endl;
 
     return 0;
 
@@ -227,6 +274,15 @@ void Visualizer::ProcessImages(const std_msgs::Char& cmd)
     double transErr = acos(cErr)*180.0/M_PI;//in degrees
     
     cout << "Vectorial angle between estimated and GT translation: " << transErr << endl;
+
+    if (Tcgrg.at<float>(0,2)>0.0001)//T valid
+    {
+      ex.push_back((GT_ea[0]-ea[0]) < -359.f? );
+      ey.push_back(GT_ea[1]-ea[1]);
+      ez.push_back(GT_ea[2]-ea[2]);
+      et.push_back(transErr);
+    }
+    
 
     //Publish Current Groundtruth
     geometry_msgs::TransformStamped current_gt;
