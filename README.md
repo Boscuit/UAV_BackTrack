@@ -1,4 +1,4 @@
-# UAVBackTrack
+# UAV_BackTrack
 ### Building the nodes for Test
 
 1. Add the path including  UAV_BackTrack project path to the ROS_PACKAGE_PATH environment variable. Open .bashrc file and add at the end the following line. Replace PATH by the folder where you cloned UAV_BackTrack:
