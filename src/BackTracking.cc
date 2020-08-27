@@ -8,6 +8,7 @@
 #include"ORBmatcher.h"
 #include"Initializer.h"
 
+#include"predefine.h"
 
 
 using namespace std;
@@ -93,6 +94,7 @@ BackTracking::BackTracking(ORBVocabulary* pVoc,const string &strSettingPath):mpO
 
 cv::Mat BackTracking::BackTrack(const cv::Mat &Im1, const cv::Mat &Im2, const double &tframe1, const double &tframe2, int index1, int index2)
 {
+    // Current 1; Desired 2
     Frame Frame1 = Frame(Im1,index1,tframe1,mpORBextractor,mpORBVocabulary,mK,mDistCoef,mbf,mThDepth);
     Frame Frame2 = Frame(Im2,index2,tframe2,mpORBextractor,mpORBVocabulary,mK,mDistCoef,mbf,mThDepth);
     Frame1.ComputeBoW();
@@ -101,36 +103,19 @@ cv::Mat BackTracking::BackTrack(const cv::Mat &Im1, const cv::Mat &Im2, const do
     vector<int> vMatches21, vIniMatches12;
     int nBoWmatches = matcher.SearchByBoW(Frame1,Frame2,vMatches21);
 
-    cout << "nBoWmatches: "<<nBoWmatches<<endl;
+    cout << "nBoWmatches: "<<nBoWmatches;
 
-<<<<<<< HEAD
-    // ShowMatches(Im1,Im2,Frame1,Frame2,vMatches21,nBoWmatches,"BoW");
-    
-    // mvbPrevMatched.resize(Frame1.mvKeysUn.size());
-    // for(size_t i=0; i<Frame1.mvKeysUn.size(); i++)
-    //     mvbPrevMatched[i]=Frame1.mvKeysUn[i].pt;
-    // int nInimatches = matcher.SearchForInitialization(Frame1,Frame2,mvbPrevMatched,vIniMatches12, 100);
-    // cout << "nInimatches: "<<nInimatches<<endl;
-
-    // vector<int> vIniMatches21 = vector<int>(Frame2.mvKeysUn.size(),-1);//store index of desired Frame's keypoints
-    // for (size_t i=0;i<vIniMatches12.size();i++)
-    // {
-    //     if(vIniMatches12[i]>=0)
-    //     {
-    //         vIniMatches21[vIniMatches12[i]] = i;
-    //     }
-    // }
-    // ShowMatches(Im1,Im2,Frame1,Frame2,vIniMatches21,nInimatches,"Initial");
-=======
+#ifndef AUTO_ITERATION
     ShowMatches(Im1,Im2,Frame1,Frame2,vMatches21,nBoWmatches,"BoW");
+#endif
     
     mvbPrevMatched.resize(Frame1.mvKeysUn.size());
     for(size_t i=0; i<Frame1.mvKeysUn.size(); i++)
         mvbPrevMatched[i]=Frame1.mvKeysUn[i].pt;
     int nInimatches = matcher.SearchForInitialization(Frame1,Frame2,mvbPrevMatched,vIniMatches12, 100);
-    cout << "nInimatches: "<<nInimatches<<endl;
+    cout << "  /   nInimatches: "<<nInimatches<<endl;
 
-    vector<int> vIniMatches21 = vector<int>(Frame2.mvKeysUn.size(),-1);//store index of desired Frame's keypoints
+    vector<int> vIniMatches21 = vector<int>(Frame2.mvKeysUn.size(),-1);//store index of current Frame's keypoints
     for (size_t i=0;i<vIniMatches12.size();i++)
     {
         if(vIniMatches12[i]>=0)
@@ -138,8 +123,10 @@ cv::Mat BackTracking::BackTrack(const cv::Mat &Im1, const cv::Mat &Im2, const do
             vIniMatches21[vIniMatches12[i]] = i;
         }
     }
+
+#ifndef AUTO_ITERATION
     ShowMatches(Im1,Im2,Frame1,Frame2,vIniMatches21,nInimatches,"Initial");
->>>>>>> 86e8fdfc9e3ba089e62d43fc416d9c6cdc9524d0
+#endif
     
     // vector<int> vMatches12 = vector<int>(Frame1.mvKeysUn.size(),-1);//store index of desired Frame's keypoints
     // for (size_t i=0;i<vMatches21.size();i++)
@@ -150,20 +137,28 @@ cv::Mat BackTracking::BackTrack(const cv::Mat &Im1, const cv::Mat &Im2, const do
     //     }
     // }
 
+    cv::Mat Tcr = cv::Mat::eye(4,4,CV_32F);
+    if(nBoWmatches<10)
+    {
+        cout << "Not enough correspondences! Pose estimate may be not accurate." << endl;
+        return Tcr;
+    }
+
     if(mpInitializer != NULL)
     {
-        cout <<"delete initializer"<<endl;
+        cout <<"delete initializer... ";
         delete mpInitializer;
         mpInitializer = static_cast<Initializer*>(NULL);
     }
 
-    cout << "New initializer"<<endl;
+    cout << "New initializer... ";
     mpInitializer =  new Initializer(Frame2.mvKeysUn,mK,1.0,200);//mK is Calibration matrix
-    cv::Mat Tcr = cv::Mat::eye(4,4,CV_32F);
     cv::Mat Rcr(3,3,CV_32F); // from current to reference
     cv::Mat tcr(3,1,CV_32F); // from current to reference
     vector<bool> vbTriangulated; // Triangulated Correspondences (mvIniMatches)
-    cout<<"initialize"<<endl;
+    cout<<"initialize... ";
+    // Matches21 from desired to current. Pose from current to desired
+    // In Initializer conversely, Ref frame:1 Current Frame:2
     if(mpInitializer->Initialize(Frame1.mvKeysUn, vMatches21, Rcr, tcr, mvIniP3D, vbTriangulated))
     {
         for(size_t i=0, iend=vMatches21.size(); i<iend;i++)
@@ -178,7 +173,9 @@ cv::Mat BackTracking::BackTrack(const cv::Mat &Im1, const cv::Mat &Im2, const do
         tcr.copyTo(Tcr.rowRange(0,3).col(3));
     }
 
+#ifndef AUTO_ITERATION
     ShowMatches(Im1,Im2,Frame1,Frame2,vMatches21,nBoWmatches,"BoW");
+#endif
     
     return Tcr;
         
@@ -240,14 +237,9 @@ void BackTracking::ShowMatches(const cv::Mat &Im1, const cv::Mat &Im2, const Fra
     imText.rowRange(im.rows,imText.rows) = cv::Mat::zeros(textSize.height+10,im.cols,im.type());
     cv::putText(imText,sText.str(),cv::Point(5,imText.rows-5),cv::FONT_HERSHEY_PLAIN,1,cv::Scalar(255,255,255),1,8);
     cv::imwrite(sTitle.str(),imText);
-<<<<<<< HEAD
 
-    // cv::imshow(methodName,imText);
-    // cv::waitKey(500);
-=======
-    // cv::imshow(methodName,imText);
-    // cv::waitKey(0);
->>>>>>> 86e8fdfc9e3ba089e62d43fc416d9c6cdc9524d0
+    cv::imshow(methodName,imText);
+    cv::waitKey(500);
 }
 
 

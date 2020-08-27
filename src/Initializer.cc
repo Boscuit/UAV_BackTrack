@@ -59,7 +59,7 @@ bool Initializer::Initialize(const Frame &CurrentFrame, const vector<int> &vMatc
     mvKeys2 = CurrentFrame.mvKeysUn;
 
     mvMatches12.clear();
-    mvMatches12.reserve(mvKeys2.size());
+    mvMatches12.reserve(mvKeys1.size());//?mvKeys1.size()?
     mvbMatched1.resize(mvKeys1.size());
     for(size_t i=0, iend=vMatches12.size();i<iend; i++)
     {
@@ -139,7 +139,7 @@ bool Initializer::Initialize(const vector<cv::KeyPoint> &CurrentKeyPoints, const
     mvKeys2 = CurrentKeyPoints;
 
     mvMatches12.clear();
-    mvMatches12.reserve(mvKeys2.size());
+    mvMatches12.reserve(mvKeys1.size());
     mvbMatched1.resize(mvKeys1.size());
     for(size_t i=0, iend=vMatches12.size();i<iend; i++)
     {
@@ -153,6 +153,7 @@ bool Initializer::Initialize(const vector<cv::KeyPoint> &CurrentKeyPoints, const
     }
 
     const int N = mvMatches12.size();
+    cout << "mvMatches12.size()"<<mvMatches12.size()<<endl;
 
     // Indices for minimum set selection
     vector<size_t> vAllIndices;

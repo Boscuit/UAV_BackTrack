@@ -14,6 +14,7 @@
 #include "geometry_msgs/TransformStamped.h"
 #include "std_msgs/Char.h"
 
+#include"predefine.h"
 
 using namespace std;
 
@@ -24,12 +25,32 @@ public:
   Visualizer(UAV_BackTrack::System* pSystem, const vector<string> &vstrImageFilenames, const vector<double> &vTimestamps)
   :mpSystem(pSystem),mvstrImage(vstrImageFilenames),mvTimestamps(vTimestamps)
   {
-      //pub&sub
-      ndesiredIndex = mvTimestamps.size()-1;
-      mTcb = mpSystem->InverseT(mTbc);
-      mTgb = mpSystem->InverseT(mTbg);
+    int nImgs = (int)vTimestamps.size();
 
-      cmd_sub = n.subscribe("/Request", 1, &Visualizer::ProcessImages, this);
+#ifdef START_INDEX
+    nImgsIndexStart = max(0,START_INDEX);
+#else
+    nImgsIndexStart = 0;
+#endif
+
+#ifdef STOP_INDEX
+    nImgsIndexStop = min(STOP_INDEX,nImgs);
+#else
+    nImgsIndexStop = vTimestamps.size();
+#endif
+
+#ifdef TARGET_INDEX
+    ndesiredIndex = max(0,min(TARGET_INDEX,nImgs));
+#else
+    ndesiredIndex = vTimestamps.size();
+#endif
+    
+    nImgsIndex = nImgsIndexStart;
+    mTcb = mpSystem->InverseT(mTbc);
+    mTgb = mpSystem->InverseT(mTbg);
+
+    //pub&sub
+    cmd_sub = n.subscribe("/Request", 1, &Visualizer::ProcessImages, this);
   }
 
   void ProcessImages(const std_msgs::Char& cmd);
@@ -46,12 +67,9 @@ public:
   vector<float> et;
 
 private:
-<<<<<<< HEAD
-  size_t nImgsIndexStart = 0;
-=======
-  size_t nImgsIndexStart = 50;
->>>>>>> 86e8fdfc9e3ba089e62d43fc416d9c6cdc9524d0
-  size_t nImgsIndex = nImgsIndexStart;
+  size_t nImgsIndexStart;
+  size_t nImgsIndexStop;
+  size_t nImgsIndex;
   size_t ndesiredIndex;
   vector<string> mvstrImage;
   vector<double> mvTimestamps;
@@ -146,23 +164,14 @@ int main(int argc, char **argv)
     
     Vis.LoadGroundTruth(argv[5]);
 
-<<<<<<< HEAD
+#ifdef AUTO_ITERATION
     std_msgs::Char sudocmd;
     sudocmd.data = 'p';
-    for (int i =0; i<69;i++)
+    for (int i =0; i<AUTO_ITERATION;i++)
     {
-      cout << "p" << endl;
       Vis.ProcessImages(sudocmd);
     }
-=======
-    // std_msgs::Char sudocmd;
-    // sudocmd.data = 'p';
-    // for (int i =0; i<69;i++)
-    // {
-    //   cout << "p" << endl;
-    //   Vis.ProcessImages(sudocmd);
-    // }
->>>>>>> 86e8fdfc9e3ba089e62d43fc416d9c6cdc9524d0
+#endif
 
     ros::spin();
 
@@ -170,6 +179,7 @@ int main(int argc, char **argv)
     ros::shutdown();
 
     //ending job
+#ifdef STORE_RESULT
     cout << "Wirting files. size: " << Vis.ex.size() << endl;
     ofstream fx,fy,fz,ft;
     fx.open("fx.txt");
@@ -184,7 +194,7 @@ int main(int argc, char **argv)
       cout << "Invalid size." <<endl;
     else
     {
-      for (int i=0; i<Vis.ex.size(); i++)
+      for (size_t i=0; i<Vis.ex.size(); i++)
       {
         fx << Vis.ex[i] << ",";
         fy << Vis.ey[i] << ",";
@@ -197,6 +207,7 @@ int main(int argc, char **argv)
     fz.close();
     ft.close();
     cout<< "saved"<<endl;
+#endif
 
     return 0;
 
@@ -208,11 +219,11 @@ void Visualizer::ProcessImages(const std_msgs::Char& cmd)
   {
     if(cmd.data == 'p')
     {    
-      cout << "p" << endl;
-      if (nImgsIndex<(mvTimestamps.size()-1))
+      if (nImgsIndex<nImgsIndexStop)
         nImgsIndex++;
       else
         nImgsIndex = nImgsIndexStart;
+      cout << "processing " << nImgsIndex << " against " << ndesiredIndex<< endl;
     }
     //if 's' don't change
 
@@ -275,13 +286,15 @@ void Visualizer::ProcessImages(const std_msgs::Char& cmd)
     
     cout << "Vectorial angle between estimated and GT translation: " << transErr << endl;
 
+#ifdef STORE_RESULT
     if (Tcgrg.at<float>(0,2)>0.0001)//T valid
     {
-      ex.push_back((GT_ea[0]-ea[0]) < -359.f? );
+      ex.push_back((GT_ea[0]-ea[0]));
       ey.push_back(GT_ea[1]-ea[1]);
       ez.push_back(GT_ea[2]-ea[2]);
       et.push_back(transErr);
     }
+#endif
     
 
     //Publish Current Groundtruth

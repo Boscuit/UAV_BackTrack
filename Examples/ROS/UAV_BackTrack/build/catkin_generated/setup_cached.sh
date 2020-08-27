@@ -8,5 +8,6 @@
 
 # modified environment variables
 export CMAKE_PREFIX_PATH="/home/boscuit/workspace/src/UAV_BackTrack/Examples/ROS/UAV_BackTrack/build/devel:$CMAKE_PREFIX_PATH"
-export ROSLISP_PACKAGE_DIRECTORIES="/home/boscuit/workspace/src/UAV_BackTrack/Examples/ROS/UAV_BackTrack/build/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
-export ROS_PACKAGE_PATH="/home/boscuit/workspace/src/UAV_BackTrack/Examples/ROS/UAV_BackTrack:/home/boscuit/catkin_ws/src:/opt/ros/melodic/share"
+export PATH="/opt/ros/melodic/bin:/home/boscuit/anaconda3/condabin:/home/boscuit/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+export ROSLISP_PACKAGE_DIRECTORIES="/home/boscuit/workspace/src/UAV_BackTrack/Examples/ROS/UAV_BackTrack/build/devel/share/common-lisp"
+export ROS_PACKAGE_PATH="/home/boscuit/workspace/src/UAV_BackTrack/Examples/ROS/UAV_BackTrack:/opt/ros/melodic/share"

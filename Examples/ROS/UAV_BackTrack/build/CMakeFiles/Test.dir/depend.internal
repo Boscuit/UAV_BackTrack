@@ -15,6 +15,7 @@ CMakeFiles/Test.dir/src/ros_test.cpp.o
  ../../../../include/ORBVocabulary.h
  ../../../../include/ORBextractor.h
  ../../../../include/System.h
+ ../../../../include/predefine.h
  /home/boscuit/workspace/src/UAV_BackTrack/Examples/ROS/UAV_BackTrack/src/ros_test.cpp
  /opt/ros/melodic/include/cv_bridge/cv_bridge.h
  /opt/ros/melodic/include/geometry_msgs/Quaternion.h

@@ -140,6 +140,8 @@ ORBVocabulary.h
 BackTracking.h
 ../../../../include/BackTracking.h
 
+../../../../include/predefine.h
+
 /home/boscuit/workspace/src/UAV_BackTrack/Examples/ROS/UAV_BackTrack/src/ros_test.cpp
 cstdio
 -
@@ -165,6 +167,8 @@ geometry_msgs/TransformStamped.h
 /home/boscuit/workspace/src/UAV_BackTrack/Examples/ROS/UAV_BackTrack/src/geometry_msgs/TransformStamped.h
 std_msgs/Char.h
 /home/boscuit/workspace/src/UAV_BackTrack/Examples/ROS/UAV_BackTrack/src/std_msgs/Char.h
+predefine.h
+/home/boscuit/workspace/src/UAV_BackTrack/Examples/ROS/UAV_BackTrack/src/predefine.h
 
 /opt/ros/melodic/include/cv_bridge/cv_bridge.h
 sensor_msgs/Image.h

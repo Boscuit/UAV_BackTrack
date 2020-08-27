@@ -35,7 +35,6 @@ System::System(const string &strVocFile, const string &strSettingsFile)
 
 cv::Mat System::BackTrack(const cv::Mat &Im1, const cv::Mat &Im2, const double &tframe1, const double &tframe2, int index1, int index2)
 {
-    cout << "BackTrack..." << endl;
     cv::Mat Tcr = mpBackTracker->BackTrack(Im1,Im2,tframe1,tframe2,index1,index2);
 
     return Tcr;

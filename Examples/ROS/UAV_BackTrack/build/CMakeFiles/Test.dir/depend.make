@@ -14,6 +14,7 @@ CMakeFiles/Test.dir/src/ros_test.cpp.o: ../../../../include/Initializer.h
 CMakeFiles/Test.dir/src/ros_test.cpp.o: ../../../../include/ORBVocabulary.h
 CMakeFiles/Test.dir/src/ros_test.cpp.o: ../../../../include/ORBextractor.h
 CMakeFiles/Test.dir/src/ros_test.cpp.o: ../../../../include/System.h
+CMakeFiles/Test.dir/src/ros_test.cpp.o: ../../../../include/predefine.h
 CMakeFiles/Test.dir/src/ros_test.cpp.o: ../src/ros_test.cpp
 CMakeFiles/Test.dir/src/ros_test.cpp.o: /opt/ros/melodic/include/cv_bridge/cv_bridge.h
 CMakeFiles/Test.dir/src/ros_test.cpp.o: /opt/ros/melodic/include/geometry_msgs/Quaternion.h
