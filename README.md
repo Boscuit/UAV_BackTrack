@@ -32,3 +32,5 @@ if STORE_RESULT is defined, the program will store all valid estimation errors b
    ```
    rosrun UAV_BackTrack Test Vocabulary/ORBvoc.txt Examples/Config/EuRoC_Mono.yaml data/cam0/data data/cam0/data.csv data/vicon0/data.csv 
    ```
+### Visualize in Rviz
+Run Rviz with configuration `Examples/Config/6_17.rviz`
