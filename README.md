@@ -1,4 +1,5 @@
 # UAV_BackTrack
+
 ### Modify "predefine.h" for a customized test
 
 ```c++
@@ -21,16 +22,28 @@ if STORE_RESULT is defined, the program will store all valid estimation errors b
    export ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}:PATH
    ```
 
-2. Run following command
+2. Go to this git repository folder. Build the project with `build.sh` and `build_ros.sh`
 
-   ```shell
-   rosrun UAV_BackTrack Test path_to_vocabulary path_to_settings path_to_image_folder path_to_times_file path_to_groundtruth
+   ```sh
+   cd ${path-to-UAV_BackTrack}
+   ./build.sh
+   ./build_ros.sh
    ```
 
-   Example usage:
+### Run the test
 
-   ```
-   rosrun UAV_BackTrack Test Vocabulary/ORBvoc.txt Examples/Config/EuRoC_Mono.yaml data/cam0/data data/cam0/data.csv data/vicon0/data.csv 
-   ```
+Run following command
+
+```shell
+rosrun UAV_BackTrack Test path_to_vocabulary path_to_settings path_to_image_folder path_to_times_file path_to_groundtruth
+```
+
+Example usage:
+
+```
+rosrun UAV_BackTrack Test Vocabulary/ORBvoc.txt Examples/Config/EuRoC_Mono.yaml data/cam0/data data/cam0/data.csv data/vicon0/data.csv 
+```
+
 ### Visualize in Rviz
+
 Run Rviz with configuration `Examples/Config/6_17.rviz`
