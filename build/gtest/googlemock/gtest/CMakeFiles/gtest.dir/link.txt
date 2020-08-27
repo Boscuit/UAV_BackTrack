@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC  -Wall   -O3 -march=native -std=c++11 -g  -shared -Wl,-soname,libgtest.so -o libgtest.so CMakeFiles/gtest.dir/src/gtest-all.cc.o  -L/home/boscuit/workspace/src/UAV_BackTrack/build/gtest/googlemock/gtest/src -Wl,-rpath,/home/boscuit/workspace/src/UAV_BackTrack/build/gtest/googlemock/gtest/src -lpthread 
